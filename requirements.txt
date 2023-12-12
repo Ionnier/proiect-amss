@@ -1,0 +1,24 @@
+Cerințe:
+--------
+- 1 diagramă generală (la nivel de echipă), care să prezinte întreaga soluție
+- câte 2 diagrame (individual), care să arate contribuția personală la proiect. Diagramele trebuie să fie de tipuri și categorii diferite (o diagramă structurală și una de comportament). Diagramele trebuie să fie realizate "de mână", nu generate din cod (de exemplu, diagramele de clasă să nu fie generate direct din cod OOP sau salvate drept captură de ecran din unelte DB).
+- o aplicație (funcțională) corespunzătoare diagramelor prezentate:
+   - un demo (care să funcționeze)
+   - 2 design patterns implementate
+
+Tema:
+--------
+Platformă pentru boardgame meetups [sugestie: echipă de 3-5]:
+Utilizatorii pot introduce locul de desfășurare a evenimentului de boardgame, specifica jocurile 
+care sunt disponibile pentru a fi jucate și data și ora preferate. Utilizatorii 
+se pot înregistra la evenimente, pot exprima preferințe pentru jocurile ce vor 
+fi jucate și propune jocuri noi. Când un eveniment a adunat numărul necesar 
+de jucători pentru unul sau mai multe jocuri, utilizatorul care a inițiat
+evenimentul poate alege un joc și anunța astfel decizia utilizatorii care s-au 
+înregistrat (fie că au ales acel joc sau nu). 
+Utilizatorii trebuie să facă checkin pentru a își valida participarea la eveniment. 
+Aplicația/platforma ar trebui să aibă o bază de date cu jocuri și 
+regulile lor (număr de participanți, reguli detaliate, etc.). 
+Jucătorii pot câștiga badge-uri pentru fiecare joc (e.g. știe regulile, a jucat atâtea jocuri, helper, etc.). 
+Utilizatorii pot alege cel mai bun jucător al unui eveniment 
+și să raporteze comportamentul altor jucători (corect, nu știe să piardă, agresiv etc.).

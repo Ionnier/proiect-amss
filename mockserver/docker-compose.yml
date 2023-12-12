@@ -1,0 +1,9 @@
+services:
+  mapping:
+    image: wiremock/wiremock
+    ports:
+      - 3000:8443
+    volumes:
+      - .:/home/wiremock
+    environment:
+      WIREMOCK_OPTIONS: '--port 8443 --verbose --enable-stub-cors'

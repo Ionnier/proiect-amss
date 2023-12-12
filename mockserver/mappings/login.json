@@ -1,0 +1,21 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/login",
+        "bodyPatterns": [
+            {
+                "equalToJson": {
+                    "email": "email@valid.com",
+                    "password": "parolavalida"
+                }
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "body": "gibberishjwt",
+        "headers": {
+            "Content-Type": "text/plain"
+        }
+    }
+}
