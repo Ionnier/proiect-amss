@@ -1,0 +1,17 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/session/1/commend/2",
+        "headers": {
+            "Authorization": {
+                "equalTo": "Bearer gibberishjwt"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

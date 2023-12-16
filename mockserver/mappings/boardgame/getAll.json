@@ -1,0 +1,18 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/boardgame",
+        "headers": {
+            "Authorization": {
+                "equalTo": "Bearer gibberishjwt"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "getAllBoardgamesJsonResponse.json",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

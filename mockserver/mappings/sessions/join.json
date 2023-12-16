@@ -1,0 +1,17 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/session/2/join",
+        "headers": {
+            "Authorization": {
+                "equalTo": "Bearer gibberishjwt"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

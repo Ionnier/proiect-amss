@@ -14,9 +14,9 @@
     },
     "response": {
         "status": 200,
-        "body": "gibberishjwt",
+        "bodyFileName": "loginResponse.json",
         "headers": {
-            "Content-Type": "text/plain"
+            "Content-Type": "application/json"
         }
     }
 }

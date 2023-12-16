@@ -1,0 +1,8 @@
+{
+    "token": "gibberishjwt",
+    "user": {
+        "id": 1,
+        "username": "Ionnier",
+        "email": "welp@welp.com"
+    }
+}

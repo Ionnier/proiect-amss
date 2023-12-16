@@ -1,0 +1,25 @@
+{
+    "request": {
+        "method": "PUT",
+        "url": "/session",
+        "headers": {
+            "Authorization": {
+                "equalTo": "Bearer gibberishjwt"
+            }
+        },
+        "bodyPatterns": [
+            {
+                "matchesJsonPath": "$.gameId"
+            },
+            {
+                "matchesJsonPath": "$.sessionId"
+            }
+        ]
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

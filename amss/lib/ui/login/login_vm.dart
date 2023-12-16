@@ -1,3 +1,4 @@
+import 'package:amss/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -88,6 +89,10 @@ class LoginVM extends ChangeNotifier {
     });
   }
 
+  bool isSigningUp() {
+    return _isSigningUp;
+  }
+
   List<(String, bool, TextEditingController)> _updateLabels() {
     if (_isSigningUp) {
       return [
@@ -107,8 +112,6 @@ class LoginVM extends ChangeNotifier {
     try {
       _isLoading = true;
       _tellUi();
-      print(path);
-      print(data);
       var response = await dio.post(path, data: data);
       _isLoading = false;
       if (response.statusCode != 200) {
@@ -121,7 +124,10 @@ class LoginVM extends ChangeNotifier {
         _tellUi();
         return;
       }
-      Settings().setApiKey(response.data.toString());
+      var token = response.data["token"];
+      var user = User.fromMap(response.data["user"]);
+      Settings().setApiKey(token);
+      Settings().setUser(user);
       _completedAuth = true;
       _tellUi();
     } on Exception catch (e) {

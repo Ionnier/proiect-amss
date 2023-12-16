@@ -44,6 +44,7 @@ classDiagram
 
 
     class Report {
+        +int id
         +User user
         +String reason
         +fromMap(map)$
@@ -54,13 +55,24 @@ classDiagram
         OPEN
         CLOSED
         FINISHED
+        +fromString(String)$
     }
 
     class UserState {
         HOST
         TENTATIVE
         ATTENDING
+        +fromString(String)$
     }
     <<enum>> UserState
     <<enum>> GameState
+
+    class Settings {
+      -Settings instance
+      -String jwtKey
+      -String baseUrl
+      -Settings()
+      +getInstance()$
+      +Dio provideDio()
+    }
 ```
