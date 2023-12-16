@@ -217,10 +217,11 @@ class SessionDetailsScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Opacity(
-                  opacity: element.state == UserState.host ? 1 : 0,
-                  child: const Icon(Icons.king_bed),
-                ),
+                if (element.state == UserState.host) const Icon(Icons.king_bed),
+                if (element.state == UserState.tentative)
+                  const Icon(Icons.calendar_month),
+                if (element.state == UserState.attending)
+                  const Icon(Icons.check),
                 Text(element.user.username)
               ],
             ),
