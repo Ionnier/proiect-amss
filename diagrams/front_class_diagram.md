@@ -1,12 +1,34 @@
 should we have everything? UI classes, Repositories, Utils?
 ```mermaid
 classDiagram
+    class BoardGameRepository {
+      -Dio dio
+      +BoardGameRepository(in dio: Dio)
+      +getAll() List of Boardgame
+    }
+
+    class SessionRepository {
+      -Dio dio
+      +SessionRepository(in dio: Dio)
+      +getAllSessions() List of Session
+      +addSession(in location: String)
+      +getSession(in id: Int) Session
+      +selectGame(in sessionId: Int, in gameId: Int)
+      +suggestGame(in sessionId: Int, in gameId: Int)
+      +joinGame(in sessionId: Int)
+      +commendPlayer(in sessionId: Int, in userId: Int)
+      +reportPlayer(in sessionId: Int, in userId: Int, in reason: String) 
+    }
+
     class User{
       +Int id
       +String username
       -String password
       +String email
-      +fromMap(map)$
+      +User()
+      +fromMap(in map: Map of String, dynamic)$
+      +fromJson(in json: Map of String, dynamic)$
+      +toJson() Map of String, dynamic
     }
     class Boardgame {
       +Int id
@@ -16,14 +38,14 @@ classDiagram
       +Int minimumAgeRequirement
       +Int estimatedPlaytime
       +String htmlRules
-      +fromMap(map)$
+      +fromMap(in map: Map of String, dynamic)$
     }
 
     class Session {
       +Int id
       +String location
       +GameState state
-      +Boardgame selectedGame
+      +Boardgame? selectedGame
       +Boardgame suggestedGames[0..]
       +Participant participants[1..]
       +fromMap(map)$
@@ -34,7 +56,7 @@ classDiagram
         +UserState userState
         +User commendedBy[0..]
         +Report reports[0..]
-        +fromMap(map)$
+        +fromMap(in map: Map of String, dynamic)$
     }
 
     User --* Participant
@@ -47,7 +69,7 @@ classDiagram
         +int id
         +User user
         +String reason
-        +fromMap(map)$
+        +fromMap(in map: Map of String, dynamic)$
     }
 
     class GameState {
@@ -55,14 +77,14 @@ classDiagram
         OPEN
         CLOSED
         FINISHED
-        +fromString(String)$
+        +fromString(in value: String) GameState$
     }
 
     class UserState {
         HOST
         TENTATIVE
         ATTENDING
-        +fromString(String)$
+        +fromString(in value: String) UserState$
     }
     <<enum>> UserState
     <<enum>> GameState
@@ -71,8 +93,14 @@ classDiagram
       -Settings instance
       -String jwtKey
       -String baseUrl
+      -String userKey
       -Settings()
+      +initialise()
       +getInstance()$
-      +Dio provideDio()
+      +provideDio() Dio
+      +getApiKey() String?
+      +getCurrentUser() User?
+      +setApiKey(in string: String?)
+      +setUser(in user: User?)
     }
 ```
