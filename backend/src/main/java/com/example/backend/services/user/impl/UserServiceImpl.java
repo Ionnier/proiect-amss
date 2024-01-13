@@ -1,8 +1,10 @@
-package com.example.backend.services;
+package com.example.backend.services.user.impl;
 
 import com.example.backend.models.User;
 import com.example.backend.repositories.UserRepository;
+import com.example.backend.services.user.UserService;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
+        val user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found: " + username);
         }
         return user;
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     @Override

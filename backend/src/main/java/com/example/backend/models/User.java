@@ -10,8 +10,11 @@ import java.util.Collection;
 
 @Entity(name = "users")
 @Table(
-        uniqueConstraints=
-        @UniqueConstraint(columnNames={"id", "username", "email"})
+        uniqueConstraints= {
+                @UniqueConstraint(columnNames={"id"}),
+                @UniqueConstraint(columnNames={"email"}),
+                @UniqueConstraint(columnNames={"username"}),
+        }
 )
 public class User implements UserDetails {
     @Id
@@ -33,7 +36,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

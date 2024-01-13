@@ -2,7 +2,8 @@ package com.example.backend.controllers;
 
 import com.example.backend.models.dtos.LoginRequest;
 import com.example.backend.models.dtos.SignupRequest;
-import com.example.backend.services.AuthenticationService;
+import com.example.backend.services.auth.AuthenticationService;
+
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,7 @@ public class AuthController {
 
     @PostMapping("/api/signup")
     public String registerUser(@RequestBody @Valid SignupRequest signupRequest) {
-        System.out.println(signupRequest.toString());
-        return authenticationService.signUp(signupRequest);
+            return authenticationService.signUp(signupRequest);
     }
 
     @PostMapping("/api/login")
