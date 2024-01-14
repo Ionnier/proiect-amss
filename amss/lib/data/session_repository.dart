@@ -36,7 +36,7 @@ class SessionRepository {
 
   Future<void> selectGame(int sessionId, int gameId) async {
     var response = await _dio
-        .put("/session", data: {"gameId": sessionId, "sessionId": gameId});
+        .put("/session", data: {"gameId": gameId, "sessionId": sessionId});
     if (response.statusCode != 200) {
       return Future.error(
           Exception("Received status = ${response.statusCode}"));
@@ -46,7 +46,7 @@ class SessionRepository {
 
   Future<void> suggestGame(int sessionId, int gameId) async {
     var response = await _dio
-        .patch("/session", data: {"gameId": sessionId, "sessionId": gameId});
+        .patch("/session", data: {"gameId": gameId, "sessionId": sessionId});
     if (response.statusCode != 200) {
       return Future.error(
           Exception("Received status = ${response.statusCode}"));
