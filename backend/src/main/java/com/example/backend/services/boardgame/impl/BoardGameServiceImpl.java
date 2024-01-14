@@ -3,7 +3,6 @@ package com.example.backend.services.boardgame.impl;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.backend.builders.BoardGameBuilder;
 import com.example.backend.models.dtos.BoardGameRequest;
 import com.example.backend.models.mappers.BoardGameMapper;
 import lombok.val;

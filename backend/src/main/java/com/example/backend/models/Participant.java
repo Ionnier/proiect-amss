@@ -20,4 +20,7 @@ public class Participant {
     public User user;
 
     public UserState userState;
+
+    @OneToMany
+    public Set<User> commendedBy;
 }

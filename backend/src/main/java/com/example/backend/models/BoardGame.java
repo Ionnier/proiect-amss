@@ -1,13 +1,7 @@
 package com.example.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
-
-import java.util.List;
-import java.util.Set;
 
 @Entity(name = "boardgames")
 @Table(

@@ -3,13 +3,11 @@ package com.example.backend.services.session.impl;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.example.backend.models.*;
 import com.example.backend.models.dtos.SessionAddSuggestedGameRequest;
 import com.example.backend.models.dtos.SessionRequest;
 import com.example.backend.models.mappers.SessionMapper;
-import com.example.backend.repositories.ParticipantRepository;
 import com.example.backend.services.boardgame.BoardGameService;
 import com.example.backend.services.participant.ParticipantService;
 import jakarta.annotation.Nonnull;
@@ -89,16 +87,12 @@ public class SessionServiceImpl implements SessionService {
             return Optional.empty();
         }
 
-        if (session.get().state == SessionState.OPEN) {
-            val participant = session.get().participants.stream()
-                    .filter(participant1 -> participant1.user.id.equals(user.id))
-                    .findFirst();
-
-            if (participant.isPresent()) {
-                participant.get().userState = UserState.ATTENDING;
-                participantService.saveParticipant(participant.get());
-            }
-
+        if (session.get().participants.stream()
+                .filter(participant -> participant.user.id.equals(user.id))
+                .findFirst()
+                .map(participant -> participant.userState == UserState.HOST)
+                .orElse(false)
+        ) {
             return session;
         }
 
@@ -107,6 +101,17 @@ public class SessionServiceImpl implements SessionService {
             userState = UserState.TENTATIVE;
         } else {
             userState = UserState.ATTENDING;
+        }
+        val existingParticipant = session.get().participants.stream()
+                .filter(participant1 -> participant1.user.id.equals(user.id))
+                .findFirst();
+
+        if (existingParticipant.isPresent()) {
+            val participant = existingParticipant.get();
+            participant.userState = userState;
+            participantService.saveParticipant(participant);
+
+            return session;
         }
 
         val participant = participantService.createParticipant(user, userState);
@@ -135,11 +140,14 @@ public class SessionServiceImpl implements SessionService {
 
         if (session.get().suggestedGames.stream()
                 .noneMatch(suggestedGame -> suggestedGame.id.equals(game.get().id))
+                || session.get().state == SessionState.CLOSED
+                || session.get().state == SessionState.FINISHED
         ) {
             return Optional.empty();
         }
 
         val updatedSession = session.get();
+        updatedSession.state = SessionState.OPEN;
         updatedSession.selectedGame = game.get();
 
         return Optional.of(sessionRepository.save(updatedSession));
@@ -154,7 +162,11 @@ public class SessionServiceImpl implements SessionService {
                 .noneMatch(
                         participant -> participant.user.id.equals(user.id)
                         && participant.userState == UserState.HOST
-                )){
+                )
+        || session.get().participants.stream()
+                .filter(participant -> participant.userState != UserState.TENTATIVE)
+                .toList().size() < session.get().selectedGame.minimumPlayers
+        ){
             return Optional.empty();
         }
 

@@ -8,7 +8,6 @@ import com.example.backend.models.User;
 import com.example.backend.models.dtos.SessionAddSuggestedGameRequest;
 import com.example.backend.models.dtos.SessionRequest;
 import jakarta.annotation.Nonnull;
-import lombok.NonNull;
 
 public interface SessionService {
     List<Session> getAllSessions();

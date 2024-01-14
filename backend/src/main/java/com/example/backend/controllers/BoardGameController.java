@@ -1,6 +1,5 @@
 package com.example.backend.controllers;
 
-import com.example.backend.builders.BoardGameBuilder;
 import com.example.backend.models.dtos.BoardGameRequest;
 import jakarta.annotation.Nullable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

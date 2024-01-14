@@ -2,8 +2,7 @@ package com.example.backend.models;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 @Entity(name = "sessions")
@@ -17,9 +16,10 @@ public class Session {
     public SessionState state;
 
     @ManyToOne
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public BoardGame selectedGame;
 
-    @OneToMany
+    @ManyToMany
     public Set<BoardGame> suggestedGames;
 
     @OneToMany

@@ -26,7 +26,7 @@ public class AuthenticationService {
     public LoginResponse signUp(SignupRequest signupRequest) {
         User user = mapper.signupRequestToUser(signupRequest);
         user.obfuscatePassword(passwordEncoder);
-        userService.saveUser(user);
+        user = userService.saveUser(user);
         return new LoginResponse(jwtService.generateToken(user.getUsername()), user);
     }
 
