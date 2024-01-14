@@ -5,6 +5,7 @@ import com.example.backend.models.dtos.LoginRequest;
 import com.example.backend.models.dtos.SignupRequest;
 import com.example.backend.models.mappers.UserMapper;
 
+import com.example.backend.models.responses.LoginResponse;
 import com.example.backend.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -22,19 +23,19 @@ public class AuthenticationService {
     private final UserService userService;
     private final UserMapper mapper;
 
-    public String signUp(SignupRequest signupRequest) {
+    public LoginResponse signUp(SignupRequest signupRequest) {
         User user = mapper.signupRequestToUser(signupRequest);
         user.obfuscatePassword(passwordEncoder);
         userService.saveUser(user);
-        return jwtService.generateToken(user.getUsername());
+        return new LoginResponse(jwtService.generateToken(user.getUsername()), user);
     }
 
-    public String login(LoginRequest loginRequest) {
+    public LoginResponse login(LoginRequest loginRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         val user = userService.getByUsername(loginRequest.getUsername());
         if (user == null) {
             throw new IllegalArgumentException("Invalid email or password");
         }
-        return jwtService.generateToken(user.getUsername());
+        return new LoginResponse(jwtService.generateToken(user.getUsername()), user);
     }
 }

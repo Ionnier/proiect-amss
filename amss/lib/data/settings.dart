@@ -9,7 +9,7 @@ class Settings {
   SharedPreferences? _prefs;
   static const _jwtKey = "JWT_KEY";
   static const _userKey = "USER_KEY";
-  static const _baseUrl = "http://localhost:3000";
+  static const _baseUrl = "http://localhost:8080";
 
   factory Settings() {
     return _singleton;
