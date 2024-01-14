@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.backend.builders.BoardGameBuilder;
 import com.example.backend.models.dtos.BoardGameRequest;
+import com.example.backend.models.mappers.BoardGameMapper;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BoardGameServiceImpl implements BoardGameService {
     private final BoardGameRepository boardgameRepository;
+    private final BoardGameMapper mapper;
 
     @Override
     public List<BoardGame> getAllBoardGames() {
@@ -31,14 +33,7 @@ public class BoardGameServiceImpl implements BoardGameService {
 
     @Override
     public BoardGame addBoardGame(BoardGameRequest request) {
-        val boardGame = new BoardGameBuilder()
-                .name(request.getName())
-                .minimumPlayers(request.getMinimumPlayers())
-                .maximumPlayers(request.getMaximumPlayers())
-                .minimumAgeRequirement(request.getMinimumAgeRequirement())
-                .estimatedPlayTime(request.getEstimatedPlayTime())
-                .htmlRules(request.getHtmlRules())
-                .build();
+        val boardGame = mapper.boardGameRequestToBoardGame(request);
         return boardgameRepository.save(boardGame);
     }
 }

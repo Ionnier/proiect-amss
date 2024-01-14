@@ -3,6 +3,7 @@ package com.example.backend.services.user.impl;
 import com.example.backend.models.User;
 import com.example.backend.repositories.UserRepository;
 import com.example.backend.services.user.UserService;
+import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.val;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
-        userRepository.save(user);
+    @Nonnull
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 }

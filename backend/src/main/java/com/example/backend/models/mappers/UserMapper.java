@@ -10,9 +10,11 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     @Mapping(target = "authorities", ignore = true)
     @Mapping(target = "email", ignore = true)
+    @Mapping(target = "id", ignore = true)
     User loginRequestToUser(LoginRequest loginRequest);
 
     @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "id", ignore = true)
     User signupRequestToUser(SignupRequest signupRequest);
     LoginRequest convert2(SignupRequest loginRequest);
 }

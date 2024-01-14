@@ -37,8 +37,7 @@ public class BoardGameController {
     }
 
     @PostMapping("boardgame")
-    public Long createBoardGame(@RequestBody BoardGameRequest request) {
-        val boardGame = boardgameService.addBoardGame(request);
-        return boardGame.id;
+    public BoardGame createBoardGame(@RequestBody BoardGameRequest request) {
+        return boardgameService.addBoardGame(request);
     }
 }
