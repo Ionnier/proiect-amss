@@ -1,29 +1,23 @@
 package com.example.backend.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "participants")
-public class Participant {
+@Entity(name = "reports")
+public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @NotBlank
+    public String reason;
+
     @ManyToOne
     public User user;
-
-    public UserState userState;
-
-    @OneToMany
-    public Set<User> commendedBy;
-
-    @OneToMany
-    public Set<Report> reports;
 }
