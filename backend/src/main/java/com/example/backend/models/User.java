@@ -1,7 +1,6 @@
 package com.example.backend.models;
 
 import jakarta.persistence.*;
-import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,13 +9,16 @@ import java.util.Collection;
 
 @Entity(name = "users")
 @Table(
-        uniqueConstraints=
-        @UniqueConstraint(columnNames={"id", "username", "email"})
+        uniqueConstraints= {
+                @UniqueConstraint(columnNames={"id"}),
+                @UniqueConstraint(columnNames={"email"}),
+                @UniqueConstraint(columnNames={"username"}),
+        }
 )
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
     public String email;
     public String username;
     public String password;
@@ -33,7 +35,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

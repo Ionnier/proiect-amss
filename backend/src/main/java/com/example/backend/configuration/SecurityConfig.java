@@ -1,7 +1,6 @@
 package com.example.backend.configuration;
 
 import com.example.backend.filters.JwtAuthenticationFilter;
-import com.example.backend.services.JwtService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,8 +37,8 @@ public class SecurityConfig {
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests((auth) -> auth
                     .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/login").anonymous()
-                    .requestMatchers(HttpMethod.POST, "/api/signup").anonymous()
+                    .requestMatchers(HttpMethod.POST, "/login").anonymous()
+                    .requestMatchers(HttpMethod.POST, "/signup").anonymous()
                     .anyRequest().authenticated()
             )
             .csrf(CsrfConfigurer::disable)

@@ -4,10 +4,17 @@ import com.example.backend.models.User;
 import com.example.backend.models.dtos.LoginRequest;
 import com.example.backend.models.dtos.SignupRequest;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    User convert(LoginRequest loginRequest);
-    User convert(SignupRequest loginRequest);
+    @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "email", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    User loginRequestToUser(LoginRequest loginRequest);
+
+    @Mapping(target = "authorities", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    User signupRequestToUser(SignupRequest signupRequest);
     LoginRequest convert2(SignupRequest loginRequest);
 }

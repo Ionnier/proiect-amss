@@ -10,7 +10,7 @@ class LoginVM extends ChangeNotifier {
   String? _errorMessage;
   bool _completedAuth = false;
   List<(String, bool, TextEditingController)> labels = [
-    ("email", false, TextEditingController()),
+    ("username", false, TextEditingController()),
     ("password", true, TextEditingController())
   ];
   Key key = Key(const Uuid().v8());
@@ -68,7 +68,7 @@ class LoginVM extends ChangeNotifier {
       return;
     }
     await doRequest("/login",
-        {"email": labels.first.$3.text, "password": labels.last.$3.text});
+        {"username": labels.first.$3.text, "password": labels.last.$3.text});
   }
 
   void pressSignUpButton() async {
