@@ -39,7 +39,7 @@ public class SecurityConfig {
                     .requestMatchers(HttpMethod.OPTIONS).permitAll()
                     .requestMatchers(HttpMethod.POST, "/login").anonymous()
                     .requestMatchers(HttpMethod.POST, "/signup").anonymous()
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
             )
             .csrf(CsrfConfigurer::disable)
             .sessionManagement(SessionManagementConfigurer::disable)

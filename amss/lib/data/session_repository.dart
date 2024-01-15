@@ -25,6 +25,15 @@ class SessionRepository {
     return;
   }
 
+  Future<void> advanceState(int id) async {
+    var response = await _dio.post("/session/$id/close");
+    if (response.statusCode != 200) {
+      return Future.error(
+          Exception("Received status = ${response.statusCode}"));
+    }
+    return;
+  }
+
   Future<Session> getSession(int id) async {
     var response = await _dio.get("/session/$id");
     if (response.statusCode != 200) {
