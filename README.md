@@ -26,7 +26,7 @@ Diagrame:
 
     * backend ([@raduitache](https://github.com/raduitache))
         * [Sequence](diagrams/AMSS_Sequence_Diagram.drawio) -> cum trateaza server-ul request-urile
-        * [Package](diagrams/AMSS_Package_Diagram.drawio) -> cum este organizat serverul
+        * [Package](diagrams/AMSS_Package_Diagram.drawio) -> cum este organizat serverul (MVC)
 
 Patterns utilizate:
  * Singleton
@@ -45,7 +45,7 @@ Patterns utilizate:
   * Dependency Injection
 
     * [front](/amss/lib/ui/details/details_screen.dart) - via Consumer / Provider
-    * [backend](/backend/src/main/java/com/example/backend/BackendApplication.java) - via Spring Beans
+    * [backend](backend/src/main/java/com/example/backend/services/boardgame/impl/BoardGameServiceImpl.java) - via Spring Beans
 * Additional stuff
 
-    *  [Prezentare](/prezentare/Bahrim_Tache_AMSS.pdf)
+    * [Prezentare](/prezentare/Bahrim_Tache_AMSS.pdf)
