@@ -13,7 +13,7 @@ class Session {
   static Session fromMap(Map<String, dynamic> json) {
     final ss = Session();
     ss.id = json["id"];
-    ss.location = json["location"];
+    ss.location = json["location"] ?? "";
     ss.gameState = GameState.fromString(json["state"]);
     if (json.containsKey("selectedGame")) {
       ss.selectedGame = Boardgame.fromMap(json["selectedGame"]);

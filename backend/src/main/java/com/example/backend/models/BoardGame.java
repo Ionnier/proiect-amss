@@ -1,7 +1,10 @@
 package com.example.backend.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "boardgames")
 @Table(
@@ -10,6 +13,8 @@ import lombok.Getter;
                 @UniqueConstraint(columnNames = {"name"}),
         }
 )
+@AllArgsConstructor
+@NoArgsConstructor
 public class BoardGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +26,6 @@ public class BoardGame {
     public Integer maximumPlayers;
     public Integer minimumAgeRequirement;
     public Integer estimatedPlayTime;
+    @Column(columnDefinition="TEXT", length = 102020)
     public String htmlRules;
 }

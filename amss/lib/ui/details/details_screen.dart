@@ -105,7 +105,7 @@ class SessionDetailsScreen extends StatelessWidget {
     ));
     for (var element in session.suggestedGames) {
       if (session.gameState == GameState.created ||
-          session.selectedGame == element) {
+          session.selectedGame?.id == element.id) {
         widgets.add(InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
@@ -313,6 +313,27 @@ class SessionDetailsScreen extends StatelessWidget {
           },
           child: const Text("Join")));
     }
+
+    if (session.gameState == GameState.open ||
+        session.gameState == GameState.finished) {
+      widgets.add(ElevatedButton(
+          onPressed: () async {
+            final asd = SessionRepository(dio: Settings().provideDio());
+            try {
+              await asd.advanceState(session.id);
+              if (context.mounted) {
+                vm.updateSession();
+              }
+            } on Exception catch (e) {
+              if (context.mounted) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(e.toString())));
+              }
+            }
+          },
+          child: const Text("Advance state")));
+    }
+    
     return Container(
         decoration: BoxDecoration(
             // Red border with the width is equal to 5

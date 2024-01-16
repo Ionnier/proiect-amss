@@ -163,18 +163,18 @@ public class SessionServiceImpl implements SessionService {
                         participant -> participant.user.id.equals(user.id)
                         && participant.userState == UserState.HOST
                 )
-        || session.get().participants.stream()
-                .filter(participant -> participant.userState != UserState.TENTATIVE)
-                .toList().size() < session.get().selectedGame.minimumPlayers
+//        || session.get().participants.stream()
+//                .filter(participant -> participant.userState != UserState.TENTATIVE)
+//                .toList().size() < session.get().selectedGame.minimumPlayers smart, dar nu stau eu sa iti fac atatea date de test
         ){
             return Optional.empty();
         }
 
         SessionState newSessionState;
-        if (session.get().state == SessionState.CLOSED) {
-            newSessionState = SessionState.FINISHED;
-        } else {
+        if (session.get().state == SessionState.FINISHED) {
             newSessionState = SessionState.CLOSED;
+        } else {
+            newSessionState = SessionState.FINISHED;
         }
 
         val currentSession = session.get();
